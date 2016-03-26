@@ -57,9 +57,9 @@
   ],
   "license": "MPL-2.0",
   "bugs": {
-    "url": "https://github.com/bbondy/electron-sample/issues"
+    "url": "https://github.com/brave/browser-laptop/issues"
   },
-  "homepage": "https://github.com/bbondy/electron-sample#readme",
+  "homepage": "https://www.brave.com/",
   "dependencies": {
     "abp-filter-parser-cpp": "1.1.x",
     "electron-localshortcut": "^0.6.0",
@@ -94,6 +94,8 @@
     "co-mocha": "^1.1.2",
     "css-loader": "^0.23.0",
     "electron-builder": "^2.3.1",
+    "electron-installer-debian": "^0.2.0",
+    "electron-installer-redhat": "^0.2.0",
     "electron-installer-squirrel-windows": "^1.2.2",
     "electron-packager": "brave/electron-packager",
     "electron-rebuild": "^1.1.1",

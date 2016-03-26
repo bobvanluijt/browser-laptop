@@ -295,6 +295,32 @@ function tabTemplateInit (frameProps) {
     })
   }
 
+  items.push(CommonMenu.separatorMenuItem)
+
+  items.push({
+    label: 'Close other tabs',
+    click: (item, focusedWindow) => {
+      if (focusedWindow) {
+        focusedWindow.webContents.send(messages.SHORTCUT_CLOSE_OTHER_FRAMES, tabKey, true, true)
+      }
+    }
+  }, {
+    label: 'Close tabs to the right',
+    click: (item, focusedWindow) => {
+      if (focusedWindow) {
+        focusedWindow.webContents.send(messages.SHORTCUT_CLOSE_OTHER_FRAMES, tabKey, true, false)
+      }
+    }
+  }, {
+    label: 'Close tabs to the left',
+    click: (item, focusedWindow) => {
+      if (focusedWindow) {
+        focusedWindow.webContents.send(messages.SHORTCUT_CLOSE_OTHER_FRAMES, tabKey, false, true)
+      }
+    }
+  },
+  CommonMenu.separatorMenuItem)
+
   items.push(Object.assign({},
     CommonMenu.reopenLastClosedTabItem,
     { enabled: WindowStore.getState().get('closedFrames').size > 0 }
@@ -506,16 +532,10 @@ function mainTemplateInit (nodeProps, frame) {
       enabled: false
     })
 
-  template.push(CommonMenu.separatorMenuItem)
-  
-  template.push({
+  template.push(CommonMenu.separatorMenuItem, {
     label: 'Inspect Element',
     click: (item, focusedWindow) => {
-      if (focusedWindow) {
-        document.querySelector( 'webview' ).openDevTools();
-        document.querySelector( 'webview' ).inspectElement(nodeProps.offsetX, nodeProps.offsetY);
-        // Used for Brave dev tools: focusedWindow.openDevTools();
-      }
+      windowActions.inspectElement(nodeProps.offsetX, nodeProps.offsetY)
     }
   })
   return template
